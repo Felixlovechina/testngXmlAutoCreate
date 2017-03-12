@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true"
+          name="/Users/felix/Documents/SourceTree/Gavroche/src/test/java/a/b/a_b.java">
+        <classes>
+            <class name="a.b.a_b">
+                <methods>
+                    <include name="c"/>
+                    <include name="d"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true" name="/Users/felix/Documents/SourceTree/Gavroche/src/test/java/a/b">
+        <classes>
+            <class name="a.b.a_b">
+                <methods>
+                    <include name="c"/>
+                    <include name="d"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true" name="/Users/felix/Documents/SourceTree/Gavroche/src/test/java/a1/b1">
+        <classes>
+            <class name="a1.b1.a1_b1">
+                <methods>
+                    <include name="c_1"/>
+                    <include name="d_1"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
