@@ -21,28 +21,6 @@ public class AutoCreatXML_VirtualFIle {
     public static AutoCreatXML_VirtualFIle instance;
 
 
-    public static void main(String[] args) {
-        /**
-         * 1、给定目录，，将目录下的所有文件放在一个xml中
-         *
-         * 2、如果有子目录，子目录内case分为一组，在xml中，suite的概念？目录之间
-         *
-         * 3、xml的结构
-         *
-         *  @Test(description = "adcode打断")
-         *
-         *  现状：
-         *  1、只能给类的上一级
-         *  2、有可能Test和方法名之间有其他异常的字符
-         *
-         *
-         *
-         * 对应关系，一个类文件一个测试用例
-         *
-         */
-
-    }
-
     public synchronized static AutoCreatXML_VirtualFIle getInstance() {
         if (instance == null) {
             instance = new AutoCreatXML_VirtualFIle();
@@ -51,7 +29,8 @@ public class AutoCreatXML_VirtualFIle {
     }
 
     //
-    public Map<String, List<Map<String, List<String>>>> readVirtualFile(VirtualFile[] files,String testngxmlpath) {
+    public String readVirtualFile(VirtualFile[] files, String testngxmlpath) {
+        StringBuffer result = new StringBuffer();
         Map<String, List<Map<String, List<String>>>> path_list = new HashMap<String, List<Map<String, List<String>>>>();
 
         //从flag往后，是java类的import路径
@@ -59,7 +38,8 @@ public class AutoCreatXML_VirtualFIle {
         Document document = DocumentHelper.createDocument();
         document.addDocType("suite", null, "http://testng.org/testng-1.0.dtd");
         Element root = document.addElement("suite").addAttribute("name", "All Test Suite");
-
+        String xmlFileName = "testng.xml";
+        String outtpath = testngxmlpath + "/" + xmlFileName;
         for (int i = 0; i < files.length; i++) {
             String path = files[i].getPath();
 
@@ -67,7 +47,7 @@ public class AutoCreatXML_VirtualFIle {
             //获取test名称
 //            String testname = path.replaceAll("/", "_").trim();
             String testname = path;
-            String xmlFileName = "testng.xml";
+
             //获取文件保存位置
             //创建根节点suite，并设置name属性为xmlsuitename
 
@@ -103,23 +83,42 @@ public class AutoCreatXML_VirtualFIle {
                         String t1 = m.group(2);
                         String t2 = t1.substring(0, t1.lastIndexOf("(")).trim();
                         String methodsname = t2.substring(t2.lastIndexOf(" ") + 1);
-                        // 有test注解的方法
-                        methodsList.add(methodsname);
-                        System.out.println(methodsname);
+
+
+                        Pattern pattern = Pattern.compile("^[A-Za-z_$]+[A-Za-z_$\\d]+$");
+                        Matcher matcher = pattern.matcher(methodsname);
+
+                        if (matcher.find()&&matcher.group().toString().equals(methodsname)){
+
+                                // 有test注解的方法
+                                methodsList.add(methodsname);
+                                System.out.println(methodsname);
+
+
+                        }
+                        else {
+                            result.append("\nwarning:file ").append(f.getName()).append(" at ").append(methodsname);
+                        }
+
+
                     }
                     Pattern p_2 = Pattern.compile("(package )(.+?)(;)");
                     Matcher m_2 = p_2.matcher(fileContain);
                     m_2.find();
                     String packageName = m_2.group(2).trim();
-                    //创建节点classs，并设置name属性
-                    Element classs = classes.addElement("class").addAttribute("name", packageName + "." + class_name);
-                    //创建节点methods，无属性
-                    Element methods = classs.addElement("methods");
-                    //创建节点classs，并设置name属性
-                    for (String testMothod : methodsList
-                            ) {
-                        Element include = methods.addElement("include").addAttribute("name", testMothod);
+
+                    if (methodsList.size() > 0) {
+                        //创建节点classs，并设置name属性
+                        Element classs = classes.addElement("class").addAttribute("name", packageName + "." + class_name);
+                        //创建节点methods，无属性
+                        Element methods = classs.addElement("methods");
+                        //创建节点classs，并设置name属性
+                        for (String testMothod : methodsList
+                                ) {
+                            Element include = methods.addElement("include").addAttribute("name", testMothod);
+                        }
                     }
+
                 }
 
             }
@@ -128,11 +127,12 @@ public class AutoCreatXML_VirtualFIle {
 
 
 //            String outtpath = Thread.currentThread().getContextClassLoader().getResource(".").getPath() + "/" + xmlFileName;
-            String outtpath = testngxmlpath+"/"+xmlFileName;
+
             System.out.println("\n\n#####\n#####\txml文件在：" + outtpath);
             UtilFile.writeStrToFile(document.asXML(), outtpath, false);
+            result.append("\n").append(outtpath);
         }
-        return path_list;
+        return  result.toString() ;
 
     }
 

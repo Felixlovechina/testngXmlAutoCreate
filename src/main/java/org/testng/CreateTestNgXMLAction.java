@@ -2,6 +2,7 @@ package org.testng;
 
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.testng.util.AutoCreatXML_VirtualFIle;
 
@@ -28,8 +29,10 @@ public class CreateTestNgXMLAction extends AnAction {
         DataContext dataContext = e.getDataContext();
 
         VirtualFile[] files = DataKeys.VIRTUAL_FILE_ARRAY.getData(dataContext);
-        AutoCreatXML_VirtualFIle.getInstance().readVirtualFile(files,mProject.getBasePath());
+        String re = AutoCreatXML_VirtualFIle.getInstance().readVirtualFile(files,mProject.getBasePath());
 
+
+        Messages.showMessageDialog(mProject, "Hi, testng xml at : \n"+re+"\n Check Please", "结果", Messages.getInformationIcon());
     }
 
 

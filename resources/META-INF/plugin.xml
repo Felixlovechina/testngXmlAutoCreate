@@ -44,9 +44,5 @@
 
     </actions>
 
-    <application-components>
-        <component>
-            <implementation-class>org.testng.CreateTestNgXMLComponet</implementation-class>
-        </component>
-    </application-components>
+
 </idea-plugin>
