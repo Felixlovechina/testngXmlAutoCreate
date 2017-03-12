@@ -17,6 +17,28 @@ import java.util.regex.Pattern;
  * Created by felix on 16/12/23.
  */
 public class AutoCreatXML_VirtualFIle {
+    public static void main(String[] args) {
+
+String methodsname ="c";
+        Pattern pattern = Pattern.compile("^[A-Za-z_$]+[A-Za-z_$\\d]+$");
+        Matcher matcher = pattern.matcher(methodsname);
+
+        if (matcher.find()&&matcher.group().toString().equals(methodsname)){
+
+            // 有test注解的方法
+
+            System.out.println(methodsname);
+            System.out.println("matcher.group() = " + matcher.group());
+
+
+        }
+        else {
+            System.out.println("matcher.group() = " + matcher.group());
+            System.out.println("methodsname = " + methodsname);
+
+        }
+
+    }
 
     public static AutoCreatXML_VirtualFIle instance;
 
@@ -84,7 +106,8 @@ public class AutoCreatXML_VirtualFIle {
                         String t2 = t1.substring(0, t1.lastIndexOf("(")).trim();
                         String methodsname = t2.substring(t2.lastIndexOf(" ") + 1);
 
-
+//                        ^[a-zA-Z_]+[a-zA-Z0-9_]*
+//                        ^[A-Za-z_$]+[A-Za-z_$\d]+$
                         Pattern pattern = Pattern.compile("^[A-Za-z_$]+[A-Za-z_$\\d]+$");
                         Matcher matcher = pattern.matcher(methodsname);
 
