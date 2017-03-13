@@ -1,7 +1,4 @@
-IDEA插件 - 自动生成testng配置xml
-
-IDEA auto create testng xml
-
+IDEA插件-自动生成testng配置xml|IDEA auto create testng xml|testngXmlAutoCreate
 plugins : gavroche.zip
 
 help：
