@@ -32,7 +32,7 @@ public class CreateTestNgXMLAction extends AnAction {
         String re = AutoCreatXML_VirtualFIle.getInstance().readVirtualFile(files,mProject.getBasePath());
 
 
-        Messages.showMessageDialog(mProject, "Hi, testng xml at : \n"+re+"\n Check Please", "结果", Messages.getInformationIcon());
+        Messages.showMessageDialog(mProject, "Hi, process result : \n"+re+"\n\n Check Please .", "结果", Messages.getInformationIcon());
     }
 
 

@@ -120,27 +120,32 @@ String methodsname ="c";
 
                         }
                         else {
-                            result.append("\nwarning:file ").append(f.getName()).append(" at ").append(methodsname);
+                            result.append("\nwarning file :").append(f.getPath()).append(" at ").append(methodsname);
                         }
 
 
                     }
                     Pattern p_2 = Pattern.compile("(package )(.+?)(;)");
                     Matcher m_2 = p_2.matcher(fileContain);
-                    m_2.find();
-                    String packageName = m_2.group(2).trim();
+                    if (m_2.find()){
+                        String packageName = m_2.group(2).trim();
 
-                    if (methodsList.size() > 0) {
-                        //创建节点classs，并设置name属性
-                        Element classs = classes.addElement("class").addAttribute("name", packageName + "." + class_name);
-                        //创建节点methods，无属性
-                        Element methods = classs.addElement("methods");
-                        //创建节点classs，并设置name属性
-                        for (String testMothod : methodsList
-                                ) {
-                            Element include = methods.addElement("include").addAttribute("name", testMothod);
+                        if (methodsList.size() > 0) {
+                            //创建节点classs，并设置name属性
+                            Element classs = classes.addElement("class").addAttribute("name", packageName + "." + class_name);
+                            //创建节点methods，无属性
+                            Element methods = classs.addElement("methods");
+                            //创建节点classs，并设置name属性
+                            for (String testMothod : methodsList
+                                    ) {
+                                Element include = methods.addElement("include").addAttribute("name", testMothod);
+                            }
                         }
+
+                    }else{
+                        result.append("\nwarning file :").append(f.getPath());
                     }
+
 
                 }
 
@@ -153,7 +158,7 @@ String methodsname ="c";
 
             System.out.println("\n\n#####\n#####\txml文件在：" + outtpath);
             UtilFile.writeStrToFile(document.asXML(), outtpath, false);
-            result.append("\n").append(outtpath);
+            result.append("\n\nTestNG XML at :\n").append(outtpath);
         }
         return  result.toString() ;
 
