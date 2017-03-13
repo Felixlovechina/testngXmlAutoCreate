@@ -1,13 +1,15 @@
 <idea-plugin version="2">
     <id>com.alibaba.autonavi.qa.testng</id>
-    <name>Creat TestNG XML</name>
+    <name>Create TestNG XML</name>
     <version>1.0</version>
     <vendor email="heygeo@163.com" url="http://amap.com">autonavi</vendor>
 
     <description><![CDATA[
-      Creat TestNG XML, by Right click on the project file <br>
+      Create TestNG XML, by Right click on the project file <br>
       创建testng的xml，通过项目的文件上右键选择，文件会被生成在项目的根目录下
-      有问题mail：zhangyi.zhy@alibaba-inc.com or heygeo@163.com
+      有问题mail: heygeo@163.com
+      详情：
+      https://github.com/Felixlovechina/testngXmlAutoCreate/blob/master/README.md
     ]]></description>
 
     <change-notes><![CDATA[
