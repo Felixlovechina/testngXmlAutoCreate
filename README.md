@@ -2,7 +2,7 @@ IDEA插件 - 自动生成testng配置xml
 
 IDEA auto create testng xml
 
-plugins : http://gitlab.alibaba-inc.com/ROAD_TEST/Gavroche/blob/master/gavroche.zip
+plugins : gavroche.zip
 
 help：
 

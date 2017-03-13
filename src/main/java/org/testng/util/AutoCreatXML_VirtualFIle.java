@@ -158,7 +158,8 @@ String methodsname ="c";
 
             System.out.println("\n\n#####\n#####\txml文件在：" + outtpath);
             UtilFile.writeStrToFile(document.asXML(), outtpath, false);
-            result.append("\n\nTestNG XML at :\n").append(outtpath);
+            result.append("\n\nTestNG XML at :\n <a href=\"").append(outtpath).append("\">").append(outtpath).append("</a>");
+//            <a href="url">Link text</a>
         }
         return  result.toString() ;
 
