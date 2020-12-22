@@ -58,7 +58,7 @@ String methodsname ="c";
         //从flag往后，是java类的import路径
 
         Document document = DocumentHelper.createDocument();
-        document.addDocType("suite", null, "http://testng.org/testng-1.0.dtd");
+        document.addDocType("suite", null, "https://testng.org/testng-1.0.dtd");
         Element root = document.addElement("suite").addAttribute("name", "All Test Suite");
         String xmlFileName = "testng.xml";
         String outtpath = testngxmlpath + "/" + xmlFileName;
